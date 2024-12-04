@@ -1,4 +1,5 @@
 pub mod day01;
+pub mod day02;
 
 static mut WIDTH: u16 = 0;
 
@@ -6,7 +7,7 @@ fn main() {
     unsafe {
         WIDTH = termion::terminal_size().unwrap().0;
     }
-    day01::solve();
+    day02::solve();
 }
 
 fn print_day(day: &str) {
