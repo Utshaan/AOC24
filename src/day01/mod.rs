@@ -34,6 +34,6 @@ pub fn solve() {
         sim_score += left_val * map.get(&left_val).unwrap_or(&0);
     }
 
-    println!("diff score = {}", diff_score);
-    println!("sim score = {}", sim_score);
+    println!("Part A : {}", diff_score);
+    println!("Part B : {}", sim_score);
 }

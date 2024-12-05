@@ -11,47 +11,52 @@ pub fn solve() {
     let ans = content
         .lines()
         .map(|l| {
-            let mut nums: Vec<u32> = l
+            let nums: Vec<i32> = l
                 .split_whitespace()
-                .map(|i| i.parse::<u32>().unwrap())
+                .map(|i| i.parse::<i32>().unwrap())
                 .collect();
 
-            let nums2 = nums.clone();
-            let asc = nums.last() >= nums.first();
-            let mut last = nums.pop().unwrap();
-            let mut line = 1;
-            let mut line2 = 1;
-            while let Some(this) = nums.pop() {
-                if (asc == (this <= last))
-                    && (1 <= this.abs_diff(last))
-                    && (this.abs_diff(last) <= 3)
+            let part_a = is_safe(&nums);
+            let mut part_b = part_a;
+            if part_a != 1 {
+                part_b = match (0..nums.len())
+                    .map(|i| {
+                        let mut copy_nums = nums.clone();
+                        copy_nums.remove(i);
+                        is_safe(&copy_nums)
+                    })
+                    .any(|res| res == 1)
                 {
-                    last = this;
-                } else {
-                    line = 0;
-                    if last == *nums2.last().unwrap() || last == *nums2.first().unwrap() {
-                        last = this;
-                    }
-                    while let Some(this) = nums.pop() {
-                        if (asc == (this <= last))
-                            && (1 <= this.abs_diff(last))
-                            && (this.abs_diff(last) <= 3)
-                        {
-                            last = this;
-                        } else {
-                            line2 = 0;
-                            break;
-                        }
-                    }
-                    break;
+                    true => 1,
+                    false => 0,
                 }
             }
 
-            println!("{} | {} | {:?}", line, line2, nums2);
-
-            (line, line2)
+            (part_a, part_b)
         })
         .fold((0, 0), |ans, x| (ans.0 + x.0, ans.1 + x.1));
 
-    println!("{:?}", ans);
+    println!("Part A : {}\nPart B : {}", ans.0, ans.1);
+}
+
+fn is_safe(nums: &Vec<i32>) -> u32 {
+    let mut ret = 1;
+    let mut first = true;
+    let mut last = (nums[1] - nums[0]).signum();
+    nums.windows(2).for_each(|pair| {
+        let temp = pair[1] - pair[0];
+        let temp_sign = temp.signum();
+
+        if temp.abs() >= 1 && temp.abs() <= 3 {
+            if temp_sign != last {
+                first = false;
+                ret = 0;
+            }
+            last = temp_sign;
+        } else {
+            first = false;
+            ret = 0;
+        }
+    });
+    return ret;
 }

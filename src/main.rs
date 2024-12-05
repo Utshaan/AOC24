@@ -7,13 +7,14 @@ fn main() {
     unsafe {
         WIDTH = termion::terminal_size().unwrap().0;
     }
+    day01::solve();
     day02::solve();
 }
 
 fn print_day(day: &str) {
     unsafe {
         println!(
-            " {} {} {} \n",
+            " {} {} {} ",
             (5..WIDTH / 2).map(|_| '-').collect::<String>(),
             day,
             (5..WIDTH / 2).map(|_| '-').collect::<String>()
