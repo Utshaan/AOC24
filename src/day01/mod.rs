@@ -1,13 +1,11 @@
 use std::collections::{BinaryHeap, HashMap};
-use std::fs;
 
-use crate::print_day;
+#[allow(unused_imports)]
+use crate::{get_example_input, get_input, print_day};
 
 pub fn solve() {
     print_day("DAY 01");
-    let content = fs::read_to_string("src/day01/input.txt").expect(
-        "Issue in reading input.txt. Make sure the file exists and the permissions are right",
-    );
+    let content = get_input("DAY 01");
 
     let mut left: BinaryHeap<u32> = BinaryHeap::new();
     let mut right: BinaryHeap<u32> = BinaryHeap::new();

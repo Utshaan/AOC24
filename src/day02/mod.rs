@@ -1,12 +1,9 @@
-use std::fs;
-
-use crate::print_day;
+#[allow(unused_imports)]
+use crate::{get_example_input, get_input, print_day};
 
 pub fn solve() {
     print_day("DAY 02");
-    let content = fs::read_to_string("src/day02/input.txt").expect(
-        "Issue in reading input.txt. Make sure the file exists and the permissions are right",
-    );
+    let content = get_input("DAY 02");
 
     let ans = content
         .lines()
