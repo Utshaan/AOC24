@@ -1,11 +1,8 @@
 #[allow(unused_imports)]
-use crate::{get_example_input, get_input, print_day};
+use crate::{get_example_input, get_input};
 
-pub fn solve() {
-    print_day("DAY 02");
-    let content = get_input("DAY 02");
-
-    let ans = content
+pub fn solve(input: String) -> (u32, u32) {
+    let ans = input
         .lines()
         .map(|l| {
             let nums: Vec<i32> = l
@@ -33,7 +30,7 @@ pub fn solve() {
         })
         .fold((0, 0), |ans, x| (ans.0 + x.0, ans.1 + x.1));
 
-    println!("Part A : {}\nPart B : {}", ans.0, ans.1);
+    ans
 }
 
 fn is_safe(nums: &Vec<i32>) -> u32 {
@@ -56,4 +53,15 @@ fn is_safe(nums: &Vec<i32>) -> u32 {
         }
     });
     return ret;
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn example() {
+        let input = get_example_input("DAY 02");
+        assert_eq!((2, 4), solve(input));
+    }
 }

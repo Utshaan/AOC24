@@ -1,17 +1,14 @@
 use std::collections::{BinaryHeap, HashMap};
 
 #[allow(unused_imports)]
-use crate::{get_example_input, get_input, print_day};
+use crate::{get_example_input, get_input};
 
-pub fn solve() {
-    print_day("DAY 01");
-    let content = get_input("DAY 01");
-
+pub fn solve(input: String) -> (u32, u32) {
     let mut left: BinaryHeap<u32> = BinaryHeap::new();
     let mut right: BinaryHeap<u32> = BinaryHeap::new();
     let mut map: HashMap<u32, u32> = HashMap::new();
 
-    content.lines().into_iter().for_each(|x| {
+    input.lines().into_iter().for_each(|x| {
         let pair: Vec<u32> = x
             .split_whitespace()
             .map(|num| num.parse::<u32>().unwrap())
@@ -32,6 +29,16 @@ pub fn solve() {
         sim_score += left_val * map.get(&left_val).unwrap_or(&0);
     }
 
-    println!("Part A : {}", diff_score);
-    println!("Part B : {}", sim_score);
+    (diff_score, sim_score)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn example() {
+        let input = get_example_input("DAY 01");
+        assert_eq!((11, 31), solve(input));
+    }
 }
