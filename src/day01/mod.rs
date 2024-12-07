@@ -1,8 +1,5 @@
 use std::collections::{BinaryHeap, HashMap};
 
-#[allow(unused_imports)]
-use crate::{get_example_input, get_input};
-
 pub fn solve(input: String) -> (u32, u32) {
     let mut left: BinaryHeap<u32> = BinaryHeap::new();
     let mut right: BinaryHeap<u32> = BinaryHeap::new();
@@ -35,6 +32,7 @@ pub fn solve(input: String) -> (u32, u32) {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::get_example_input;
 
     #[test]
     fn example() {

@@ -1,8 +1,5 @@
 use regex::Regex;
 
-#[allow(unused_imports)]
-use crate::{get_example_input, get_input};
-
 pub fn solve(input: String) -> (u32, u32) {
     (mul_solve(&input), do_mul_solve(&input))
 }
@@ -49,6 +46,7 @@ fn do_mul_solve(data: &str) -> u32 {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::get_example_input;
 
     #[test]
     fn example() {

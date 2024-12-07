@@ -1,6 +1,3 @@
-#[allow(unused_imports)]
-use crate::{get_example_input, get_input};
-
 pub fn solve(input: String) -> (u32, u32) {
     let ans = input
         .lines()
@@ -58,6 +55,7 @@ fn is_safe(nums: &Vec<i32>) -> u32 {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::get_example_input;
 
     #[test]
     fn example() {
