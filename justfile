@@ -1,5 +1,5 @@
 run day: build
-    @./target/debug/advent_of_code_23 --day {{day}}
+    @./target/debug/aoc24 --day {{day}}
 
 build:
     @cargo build
@@ -7,8 +7,8 @@ build:
 tests:
     @cargo test --workspace --quiet
 
-test day:
-    @cargo test {{day}} --quiet
+test name:
+    @cargo test {{name}} --quiet
 
 clean:
     @cargo clean
