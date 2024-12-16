@@ -1,8 +1,8 @@
 run day: build
-    @./target/debug/aoc24 --day {{day}}
+    @./target/release/aoc24 --day {{day}}
 
 build:
-    @cargo build
+    @cargo build --release
 
 tests:
     @cargo test --workspace --quiet
