@@ -1,4 +1,4 @@
-pub fn solve(input: String) -> (u32, u32) {
+pub fn solve(input: String) -> (u64, u64) {
     let ans = input
         .lines()
         .map(|l| {
@@ -30,7 +30,7 @@ pub fn solve(input: String) -> (u32, u32) {
     ans
 }
 
-fn is_safe(nums: &Vec<i32>) -> u32 {
+fn is_safe(nums: &Vec<i32>) -> u64 {
     let mut ret = 1;
     let mut first = true;
     let mut last = (nums[1] - nums[0]).signum();

@@ -1,14 +1,14 @@
 use std::collections::{BinaryHeap, HashMap};
 
-pub fn solve(input: String) -> (u32, u32) {
-    let mut left: BinaryHeap<u32> = BinaryHeap::new();
-    let mut right: BinaryHeap<u32> = BinaryHeap::new();
-    let mut map: HashMap<u32, u32> = HashMap::new();
+pub fn solve(input: String) -> (u64, u64) {
+    let mut left: BinaryHeap<u64> = BinaryHeap::new();
+    let mut right: BinaryHeap<u64> = BinaryHeap::new();
+    let mut map: HashMap<u64, u64> = HashMap::new();
 
     input.lines().into_iter().for_each(|x| {
-        let pair: Vec<u32> = x
+        let pair: Vec<u64> = x
             .split_whitespace()
-            .map(|num| num.parse::<u32>().unwrap())
+            .map(|num| num.parse::<u64>().unwrap())
             .collect();
         left.push(pair[0]);
         right.push(pair[1]);

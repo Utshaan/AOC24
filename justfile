@@ -1,6 +1,9 @@
 run day: build
     @./target/release/aoc24 --day {{day}}
 
+runs: build
+    @./target/release/aoc24 --day 0
+
 build:
     @cargo build --release
 

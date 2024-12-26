@@ -6,6 +6,9 @@ pub mod day03;
 pub mod day04;
 pub mod day05;
 pub mod day06;
+pub mod day07;
+pub mod day08;
+pub mod day09;
 
 pub static mut WIDTH: u16 = 0;
 
@@ -13,15 +16,20 @@ pub fn solve_day(day: u8) {
     let ans = match day {
         ones if ones < 10 => {
             print_day(&format!("DAY 0{}", ones));
-            let input = get_input(&format!("DAY 0{}", ones));
-            match ones {
-                1 => Some(day01::solve(input)),
-                2 => Some(day02::solve(input)),
-                3 => Some(day03::solve(input)),
-                4 => Some(day04::solve(input)),
-                5 => Some(day05::solve(input)),
-                6 => Some(day06::solve(input)),
-                _ => None,
+            match get_input(&format!("DAY 0{}", ones)) {
+                Ok(input) => match ones {
+                    1 => Some(day01::solve(input)),
+                    2 => Some(day02::solve(input)),
+                    3 => Some(day03::solve(input)),
+                    4 => Some(day04::solve(input)),
+                    5 => Some(day05::solve(input)),
+                    6 => Some(day06::solve(input)),
+                    7 => Some(day07::solve(input)),
+                    8 => Some(day08::solve(input)),
+                    9 => Some(day09::solve(input)),
+                    _ => None,
+                },
+                Err(_) => None,
             }
         }
         tens => {
@@ -47,12 +55,11 @@ fn print_day(day: &str) {
     }
 }
 
-fn get_input(day_str: &str) -> String {
+fn get_input(day_str: &str) -> Result<String, std::io::Error> {
     fs::read_to_string(format!(
         "src/{}/input.txt",
         day_str.to_lowercase().replace(" ", "")
     ))
-    .expect("Issue in reading input.txt. Make sure the file exists and the permissions are right")
 }
 
 #[allow(dead_code)]

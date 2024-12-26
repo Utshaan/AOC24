@@ -15,5 +15,11 @@ fn main() {
 
     let args = Args::parse();
 
-    solve_day(args.day);
+    if args.day == 0 {
+        (1..=25).for_each(|day| {
+            solve_day(day);
+        });
+    } else {
+        solve_day(args.day);
+    }
 }

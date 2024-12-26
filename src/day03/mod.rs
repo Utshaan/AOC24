@@ -1,22 +1,22 @@
 use regex::Regex;
 
-pub fn solve(input: String) -> (u32, u32) {
+pub fn solve(input: String) -> (u64, u64) {
     (mul_solve(&input), do_mul_solve(&input))
 }
 
-fn mul_solve(data: &str) -> u32 {
-    let reg = Regex::new(r"mul\((?<n1>[0-9]+),(?<n2>[0-9]+)\)").unwrap();
+fn mul_solve(data: &str) -> u64 {
+    let reg = Regex::new(r"mul\((?<n1>\d{1,3}+),(?<n2>\d{1,3}+)\)").unwrap();
 
     reg.captures_iter(data)
         .map(|caps| {
             let (_, [n1, n2]) = caps.extract();
-            n1.parse::<u32>().unwrap() * n2.parse::<u32>().unwrap()
+            n1.parse::<u64>().unwrap() * n2.parse::<u64>().unwrap()
         })
         .sum()
 }
 
-fn do_mul_solve(data: &str) -> u32 {
-    let reg_end = Regex::new(r"(do\(\)|don't\(\)|mul\((?<n1>[0-9]+),(?<n2>[0-9]+)\))").unwrap();
+fn do_mul_solve(data: &str) -> u64 {
+    let reg_end = Regex::new(r"(do\(\)|don't\(\)|mul\((?<n1>\d{1,3}+),(?<n2>\d{1,3}+)\))").unwrap();
 
     let mut todo = true;
     reg_end
@@ -38,7 +38,7 @@ fn do_mul_solve(data: &str) -> u32 {
         .map(|cap| {
             let n1 = cap.get(2).unwrap().as_str();
             let n2 = cap.get(3).unwrap().as_str();
-            n1.parse::<u32>().unwrap() * n2.parse::<u32>().unwrap()
+            n1.parse::<u64>().unwrap() * n2.parse::<u64>().unwrap()
         })
         .sum()
 }

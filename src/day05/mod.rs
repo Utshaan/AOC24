@@ -1,20 +1,20 @@
 use regex::Regex;
 use std::collections::{HashMap, HashSet};
 
-pub fn solve(input: String) -> (u32, u32) {
+pub fn solve(input: String) -> (u64, u64) {
     let (rules, orders) = match input.find("\n\n") {
         Some(i) => input.split_at(i),
         None => ("", ""),
     };
 
     let rreg = Regex::new(r"(?<n1>[0-9]+)\|(?<n2>[0-9]+)").unwrap();
-    let mut map: HashMap<u32, HashSet<u32>> = HashMap::new();
+    let mut map: HashMap<u64, HashSet<u64>> = HashMap::new();
 
     rules.lines().for_each(|x| {
         rreg.captures_iter(x).for_each(|caps| {
             let (_, [n1, n2]) = caps.extract();
-            let n1 = n1.parse::<u32>().unwrap();
-            let n2 = n2.parse::<u32>().unwrap();
+            let n1 = n1.parse::<u64>().unwrap();
+            let n2 = n2.parse::<u64>().unwrap();
             map.entry(n1)
                 .and_modify(|s| {
                     (*s).insert(n2);
@@ -45,10 +45,10 @@ pub fn solve(input: String) -> (u32, u32) {
                 .captures_iter(x)
                 .map(|caps| {
                     let (_, [n1]) = caps.extract();
-                    let n1 = n1.parse::<u32>().unwrap();
+                    let n1 = n1.parse::<u64>().unwrap();
                     n1
                 })
-                .collect::<Vec<u32>>();
+                .collect::<Vec<u64>>();
             let mut temp = order.clone();
             let mut temp_2 = order.clone();
             let a_0 = order

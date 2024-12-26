@@ -1,6 +1,6 @@
 use std::char;
 
-pub fn solve(input: String) -> (u32, u32) {
+pub fn solve(input: String) -> (u64, u64) {
     let mut x_positions = Vec::new();
     let mut a_positions = Vec::new();
     let mut ans = (0, 0);
