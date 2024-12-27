@@ -37,6 +37,16 @@ fn get_digit_len(mut num: u64) -> u32 {
     len
 }
 
+fn split_evenly(num: u64) -> Option<(u64, u64)> {
+    let len = get_digit_len(num);
+    if len % 2 == 0 {
+        let fir = num / 10_i32.pow(len / 2 as u32) as u64;
+        Some((fir, num - fir * 10_i32.pow(len / 2 as u32) as u64))
+    } else {
+        None
+    }
+}
+
 fn blink_n(num: u64, n: u64, cache: &mut Cache, ans: u64) -> u64 {
     if cache.contains_key(&(num, n)) {
         return cache.get(&(num, n)).unwrap().clone();
@@ -46,16 +56,10 @@ fn blink_n(num: u64, n: u64, cache: &mut Cache, ans: u64) -> u64 {
     }
     let new_ans = match num {
         0 => blink_n(1, n - 1, cache, ans),
-        num => {
-            let len = get_digit_len(num);
-            if len % 2 == 0 {
-                let fir = num / 10_i32.pow(len / 2 as u32) as u64;
-                let sec = num - fir * 10_i32.pow(len / 2 as u32) as u64;
-                blink_n(fir, n - 1, cache, ans) + blink_n(sec, n - 1, cache, ans)
-            } else {
-                blink_n(num * 2024, n - 1, cache, ans)
-            }
-        }
+        num => match split_evenly(num) {
+            Some((fir, sec)) => blink_n(fir, n - 1, cache, ans) + blink_n(sec, n - 1, cache, ans),
+            None => blink_n(num * 2024, n - 1, cache, ans),
+        },
     };
 
     cache.insert((num, n), new_ans);
@@ -70,7 +74,7 @@ mod tests {
     #[test]
     fn example() {
         let input = get_example_input("DAY 11");
-        assert_eq!((55312, 0), solve(input));
+        assert_eq!((55312, 65601038650482), solve(input));
     }
 
     #[test]
