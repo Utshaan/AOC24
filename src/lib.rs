@@ -9,6 +9,8 @@ pub mod day06;
 pub mod day07;
 pub mod day08;
 pub mod day09;
+pub mod day10;
+pub mod day11;
 
 pub static mut WIDTH: u16 = 0;
 
@@ -34,7 +36,14 @@ pub fn solve_day(day: u8) {
         }
         tens => {
             print_day(&format!("DAY {}", tens));
-            None
+            match get_input(&format!("DAY {}", tens)) {
+                Ok(input) => match tens {
+                    10 => Some(day10::solve(input)),
+                    11 => Some(day11::solve(input)),
+                    _ => None,
+                },
+                Err(_) => None,
+            }
         }
     };
 
